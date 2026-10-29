@@ -12,7 +12,7 @@
 :root{
   --bg:#f3f2ef; --paper:#ffffff; --ink:#1d1f22; --muted:#5f636a; --line:#dddcd7;
   --accent:#3d5a80; --stitch:rgba(29,31,34,.07); --onink:#f3f2ee;
-  --display:"Unbounded",system-ui,sans-serif; --body:"Manrope",system-ui,-apple-system,sans-serif;
+  --gut:clamp(20px,4.5vw,96px); --display:"Unbounded",system-ui,sans-serif; --body:"Manrope",system-ui,-apple-system,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#16181b; --paper:#1f2226; --ink:#ecebe7; --muted:#a3a7ad; --line:#33373c;
@@ -22,12 +22,13 @@
   --accent:#8fb0d8; --stitch:rgba(236,235,231,.06); --onink:#16181b; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--body);margin:0}
-.wrap{max-width:1360px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.wrap{margin:0 auto;padding-left:max(var(--gut),env(safe-area-inset-left,0px));padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;letter-spacing:-.015em}
-h1{font-size:clamp(32px,4.6vw,64px);line-height:1.04}
-h2{font-size:clamp(26px,3.2vw,44px);line-height:1.08}
+h1{font-size:clamp(40px,5.2vw,104px);line-height:1}
+.sub{font-family:var(--display);font-weight:400;font-size:clamp(20px,1.9vw,36px);line-height:1.2;text-wrap:balance}
+h2{font-size:clamp(28px,3.4vw,64px);line-height:1.06}
 h3{font-size:18px}
-p{margin:0;max-width:56ch}
+p{margin:0;max-width:60ch}
 .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
 .quilt{background-color:var(--bg);background-image:
   repeating-linear-gradient(45deg,transparent 0 27px,var(--stitch) 27px 28px),
@@ -46,12 +47,12 @@ nav a:hover,nav a:focus-visible{color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 /* page block: text + photo, photo bleeds to the edge */
-.page{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(88vh,860px)}
-.page .text{display:grid;align-content:center;gap:28px;padding-block:clamp(40px,6vw,88px);
-  padding-left:max(24px,calc((100vw - 1360px)/2 + 24px),env(safe-area-inset-left,0px));padding-right:clamp(24px,5vw,72px)}
+.page{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:min(90vh,1100px)}
+.page .text{display:grid;align-content:center;gap:clamp(24px,2vw,40px);padding-block:clamp(40px,6vw,88px);
+  padding-left:max(var(--gut),env(safe-area-inset-left,0px));padding-right:var(--gut)}
 .page.solo{grid-template-columns:1fr;min-height:0;border-top:1px solid var(--line)}
-.page.solo .text{padding-right:max(24px,calc((100vw - 1360px)/2 + 24px),env(safe-area-inset-right,0px))}
-.page.flip .text{order:2;padding-left:clamp(24px,5vw,72px);padding-right:max(24px,calc((100vw - 1360px)/2 + 24px),env(safe-area-inset-right,0px))}
+.page.solo .text{padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
+.page.flip .text{order:2;padding-left:var(--gut);padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
 .page figure{margin:0;position:relative;min-height:420px}
 .page figure .track{position:absolute;inset:0;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
 .page figure .track::-webkit-scrollbar{display:none}
@@ -64,19 +65,19 @@ nav a:hover,nav a:focus-visible{color:var(--accent)}
 .arr{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#1d1f22;font:600 20px/1 var(--body);cursor:pointer;display:grid;place-items:center}
 .arr:hover{background:#fff}
 .arr:disabled{opacity:.4;cursor:default}
-.lead{font-size:clamp(17px,1.4vw,20px);color:var(--muted)}
+.lead{font-size:clamp(17px,1.3vw,24px);color:var(--muted)}
 .ctas{display:flex;gap:12px;flex-wrap:wrap}
 .vs{display:flex;gap:32px;flex-wrap:wrap;padding-top:20px;border-top:1px solid var(--line)}
 .vs div{display:grid;gap:2px}
-.vs b{font-family:var(--display);font-size:clamp(22px,2.2vw,30px);font-weight:600;font-variant-numeric:tabular-nums}
+.vs b{font-family:var(--display);font-size:clamp(22px,2.2vw,40px);font-weight:600;font-variant-numeric:tabular-nums}
 .vs span{font-size:14px;color:var(--muted)}
 
 /* sizes */
 .sizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
 .size{background:var(--paper);padding:22px 20px;display:grid;gap:8px;align-content:start}
-.size .l{font-family:var(--display);font-size:40px;line-height:1;font-weight:600}
+.size .l{font-family:var(--display);font-size:clamp(36px,3vw,56px);line-height:1;font-weight:600}
 .size .p{font-weight:700;font-variant-numeric:tabular-nums}
-.size span{font-size:14px;color:var(--muted)}
+.size span{font-size:clamp(14px,.95vw,17px);color:var(--muted)}
 .note{font-size:14px;color:var(--muted)}
 
 /* how */
@@ -101,7 +102,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;font-size:13px;color:
 @media (max-width:900px){
   .page{grid-template-columns:1fr;min-height:0}
   .page .text,.page.solo{grid-template-columns:1fr;min-height:0;border-top:1px solid var(--line)}
-.page.solo .text{padding-right:max(24px,calc((100vw - 1360px)/2 + 24px),env(safe-area-inset-right,0px))}
+.page.solo .text{padding-right:max(var(--gut),env(safe-area-inset-right,0px))}
 .page.flip .text{order:2;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
   .page figure{order:1;min-height:0;aspect-ratio:4/5;max-height:70vh}
   .steps{grid-template-columns:1fr 1fr}
@@ -129,7 +130,7 @@ footer{border-top:1px solid var(--line);padding-block:28px;font-size:13px;color:
 <section id="covers" class="page quilt">
   <div class="text">
     <span class="eyebrow">Москва · праздники в лофтах</span>
-    <h1>Чехлы на диваны, чтобы не платить лофту за пятна</h1>
+    <div style="display:grid;gap:16px"><h1>Чехлы на диваны</h1><p class="sub">чтобы не платить лофту за пятна</p></div>
     <p class="lead">Стёганая экокожа накидкой на диван или кресло. Вино и торт вытираются тряпкой. Привезём, постелим и заберём, мытьё на нас.</p>
     <div class="vs">
       <div><span>штраф лофта за диван</span><b>7–10 тыс ₽</b></div>
